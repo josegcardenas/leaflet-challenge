@@ -1,4 +1,4 @@
-var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson";
+var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
 
 // Get request with .then to avoid time out
 d3.json(queryUrl).then(function(response) { 
@@ -17,7 +17,7 @@ d3.json(queryUrl).then(function(response) {
 
     pointToLayer: (featureData, latlng) => {
       return L.circle(latlng,
-        {radius: featureData.properties.mag*200000,
+        {radius: featureData.properties.mag*100000,
         fillColor: colorFILL(featureData.geometry.coordinates[2]),
         fillOpacity: 0.5,
         opacity: 9,
