@@ -17,16 +17,16 @@ d3.json(queryUrl).then(function(response) {
 
     pointToLayer: (featureData, latlng) => {
       return L.circle(latlng,
-        {radius: featureData.properties.mag*10000,
-        fillColor: cirleColor(featureData.geometry.coordinates[2]),
-        fillOpacity: 1,
-        opacity: 1
+        {radius: featureData.properties.mag*200000,
+        fillColor: colorFILL(featureData.geometry.coordinates[2]),
+        fillOpacity: 0.5,
+        opacity: 9
       }
         )
   }
   });
   
-    function cirleColor(depth) {
+    function colorFILL(depth) {
       console.log("depth:",depth)
         if (depth > 90){color = "#E62817";}
         
@@ -62,25 +62,23 @@ d3.json(queryUrl).then(function(response) {
     Earthquakes : earthquakes
   };
 
-  // Create our map, giving it the streetmap and earthquakes layers to display on load
+  // Create our map to display on load
   var myMap = L.map("map", {
     center: [
-      37.09, -95.71
+      25, -20.71
     ],
-    zoom: 5,
+    zoom: 3,
     layers: [streetmap, earthquakes]
   });
 
-  // Create a layer control
-  // Pass in our baseMaps and overlayMaps
-  // Add the layer control to the map
+  // Create layer control
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(myMap);
 
   // legend at bottom right corner
   var legend = L.control({
-    position: "bottomright"
+    position: "bottomleft"
   });
 
   legend.onAdd = function () {
