@@ -1,4 +1,13 @@
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
+var queryUrl2 = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
+
+
+d3.json(queryUrl2).then(function(platedata) {
+    var tectonicplates = L.geoJson(platedata, {
+        color: "orange",
+        weight: 2
+      })
+      .addTo(tectonicplates);
 
 // Get request with .then to avoid time out
 d3.json(queryUrl).then(function(response) { 
@@ -53,8 +62,6 @@ d3.json(queryUrl).then(function(response) {
     accessToken: API_KEY
   });
 
-  var tectonicplates = new L.LayerGroup();
-
   // Define a baseMaps object to hold our base layers
   var baseMaps = {
     "Street Map": streetmap,
@@ -67,12 +74,7 @@ d3.json(queryUrl).then(function(response) {
     Earthquakes : earthquakes,
     "Tectonic Plates" : tectonicplates
   };
-  d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(platedata) {
-    L.geoJson(platedata, {
-        color: "orange",
-        weight: 2
-      })
-      .addTo(tectonicplates);
+  
   // Create our map to display on load
   var myMap = L.map("map", {
     center: [
