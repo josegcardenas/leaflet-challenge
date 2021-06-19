@@ -20,7 +20,8 @@ d3.json(queryUrl).then(function(response) {
         {radius: featureData.properties.mag*200000,
         fillColor: colorFILL(featureData.geometry.coordinates[2]),
         fillOpacity: 0.5,
-        opacity: 9
+        opacity: 9,
+        color: "black"
       }
         )
   }
